@@ -833,10 +833,27 @@ function formatDisplayLocation(current, next, progress) {
 }
 
 function formatContinuousTime(current, next, progress) {
-  const start = parseClockSeconds(current.time);
-  const end = parseClockSeconds(next.time);
-  const normalizedEnd = end <= start ? end + 24 * 60 * 60 : end;
-  return formatClockSeconds(start + (normalizedEnd - start) * progress);
+  const start = parseFrameSeconds(current);
+  const end = parseFrameSeconds(next);
+  if (end <= start) {
+    return formatClockSeconds(start);
+  }
+  return formatClockSeconds(start + (end - start) * progress);
+}
+
+function parseFrameSeconds(frame) {
+  if (frame.timestamp) {
+    const parsed = parseIsoLocalSeconds(frame.timestamp);
+    if (parsed !== null) return parsed;
+  }
+  return parseClockSeconds(frame.time);
+}
+
+function parseIsoLocalSeconds(value) {
+  const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);
+  if (!match) return null;
+  const [, year, month, day, hours, minutes, seconds] = match.map(Number);
+  return Math.floor(Date.UTC(year, month - 1, day, hours, minutes, seconds) / 1000);
 }
 
 function parseClockSeconds(label) {
@@ -851,7 +868,9 @@ function parseClockSeconds(label) {
 
 function formatClockSeconds(value) {
   const rounded = Math.floor(value);
-  const day = Math.floor(rounded / (24 * 60 * 60)) + 1;
+  const replayStart = parseFrameSeconds(replayFrames[0]);
+  const relative = Math.max(0, rounded - replayStart);
+  const day = Math.floor(relative / (24 * 60 * 60)) + 1;
   const secondsInDay = ((rounded % (24 * 60 * 60)) + 24 * 60 * 60) % (24 * 60 * 60);
   const hours = Math.floor(secondsInDay / 3600);
   const minutes = Math.floor((secondsInDay % 3600) / 60);
