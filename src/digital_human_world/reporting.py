@@ -35,6 +35,32 @@ def write_validation_artifacts(
     return summary
 
 
+def write_town_artifacts(
+    engine: SimulationEngine,
+    output_dir: str | Path,
+    *,
+    run_metadata: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    target_dir = Path(output_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    events_path = target_dir / "events.jsonl"
+    ticks_path = target_dir / "ticks.jsonl"
+    text_log_path = target_dir / "events.log"
+    summary_path = target_dir / "town_summary.json"
+
+    _write_events_jsonl(events_path, engine.event_history)
+    _write_jsonl(ticks_path, engine.tick_history)
+    text_log_path.write_text("\n".join(engine.logs) + "\n", encoding="utf-8")
+
+    summary = build_town_summary(engine, run_metadata=run_metadata or {})
+    summary_path.write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return summary
+
+
 def build_summary(
     engine: SimulationEngine,
     *,
@@ -137,6 +163,96 @@ def build_summary(
             "events": len(engine.event_history),
         },
     }
+
+
+def build_town_summary(
+    engine: SimulationEngine,
+    *,
+    run_metadata: dict[str, Any],
+) -> dict[str, Any]:
+    autonomous_people = [
+        person for person in engine.world.people.values() if person.autonomous
+    ]
+    completed_tasks = {
+        task_id: task.completed for task_id, task in engine.world.tasks.items()
+    }
+    person_events = {
+        person.id: len(events_for_person(engine, person.id))
+        for person in autonomous_people
+    }
+    invalid_action_failures = [
+        event
+        for event in engine.event_history
+        if event.event_type is EventType.ACTION_FAILED
+        and event.payload.get("reason") == "invalid_action_plan"
+    ]
+
+    accepted = (
+        len(autonomous_people) >= 5
+        and all(completed_tasks.values())
+        and all(count > 0 for count in person_events.values())
+        and not invalid_action_failures
+    )
+
+    return {
+        "run_metadata": run_metadata,
+        "autonomous_people": [
+            {
+                "id": person.id,
+                "name": person.name,
+                "home_id": person.home_id,
+                "location_id": person.location_id,
+                "hunger": person.hunger,
+                "fatigue": person.fatigue,
+                "active_goal": person.working_memory.active_goal,
+                "profile": {
+                    "identity": person.profile.identity,
+                    "stable_traits": list(person.profile.stable_traits),
+                    "learned_rules": dict(person.profile.learned_rules),
+                    "preferences": dict(person.profile.preferences),
+                    "skills": dict(person.profile.skills),
+                },
+            }
+            for person in autonomous_people
+        ],
+        "tasks": completed_tasks,
+        "person_event_counts": person_events,
+        "acceptance": {
+            "b4_pass": accepted,
+            "failures": _town_failures(
+                autonomous_people,
+                completed_tasks,
+                person_events,
+                invalid_action_failures,
+            ),
+        },
+    }
+
+
+def events_for_person(engine: SimulationEngine, person_id: str) -> list[Event]:
+    return [
+        event
+        for event in engine.event_history
+        if event.actor_id == person_id or person_id in event.target_ids
+    ]
+
+
+def _town_failures(
+    autonomous_people: list[Any],
+    completed_tasks: dict[str, bool],
+    person_events: dict[str, int],
+    invalid_action_failures: list[Event],
+) -> list[str]:
+    failures = []
+    if len(autonomous_people) < 5:
+        failures.append("fewer_than_five_autonomous_people")
+    if not all(completed_tasks.values()):
+        failures.append("not_all_tasks_completed")
+    if not all(count > 0 for count in person_events.values()):
+        failures.append("person_without_events")
+    if invalid_action_failures:
+        failures.append("invalid_action_plan_failure")
+    return failures
 
 
 def _write_events_jsonl(path: Path, events: list[Event]) -> None:

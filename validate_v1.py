@@ -13,6 +13,7 @@ if str(SRC) not in sys.path:
 from digital_human_world.config import load_policy_config
 from digital_human_world.llm_policy import build_policy_from_config
 from digital_human_world.reporting import write_validation_artifacts
+from digital_human_world.replay_export import write_world_view_replay
 from digital_human_world.scenario import build_demo_engine
 
 
@@ -35,6 +36,18 @@ def main() -> None:
             "end_time": end_time.isoformat(),
         },
     )
+    replay_artifact_path = output_dir / "world_view_replay.json"
+    frontend_replay_path = ROOT / "src" / "web" / "data" / "generatedReplay.json"
+    replay_payload = write_world_view_replay(
+        engine,
+        replay_artifact_path,
+        summary=summary,
+    )
+    write_world_view_replay(
+        engine,
+        frontend_replay_path,
+        summary=summary,
+    )
 
     print("== Validation Summary ==")
     print(f"policy_mode: {summary['run_metadata']['policy_mode']}")
@@ -50,6 +63,9 @@ def main() -> None:
     print(f"decision_total: {summary['decision_stats']['total']}")
     print(f"events: {summary['artifacts']['events']}")
     print(f"ticks: {summary['artifacts']['ticks']}")
+    print(f"world_view_frames: {len(replay_payload['replayFrames'])}")
+    print(f"world_view_replay: {replay_artifact_path}")
+    print(f"frontend_replay: {frontend_replay_path}")
     print(f"artifacts_dir: {output_dir}")
 
 

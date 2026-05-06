@@ -151,6 +151,106 @@ def build_demo_engine(
     return engine, end_time
 
 
+def build_town_engine(
+    policy: DecisionPolicy | None = None,
+) -> tuple[SimulationEngine, datetime]:
+    start_time = datetime(2026, 4, 10, 7, 59, 50)
+    world = WorldState(
+        current_time=start_time,
+        weather=Weather.CLEAR,
+        locations={
+            "home": Location("home", "Lin Home", LocationKind.INDOOR, ["road"]),
+            "farm_house": Location("farm_house", "Farm House", LocationKind.INDOOR, ["road"]),
+            "craft_house": Location("craft_house", "Craft House", LocationKind.INDOOR, ["road"]),
+            "cottage": Location("cottage", "Cottage", LocationKind.INDOOR, ["road"]),
+            "lodge": Location("lodge", "Lodge", LocationKind.INDOOR, ["road"]),
+            "road": Location(
+                "road",
+                "Main Road",
+                LocationKind.OUTDOOR,
+                ["home", "farm_house", "craft_house", "cottage", "lodge", "warehouse", "square", "workshop", "field", "grove"],
+            ),
+            "warehouse": Location(
+                "warehouse",
+                "Warehouse",
+                LocationKind.INDOOR,
+                ["road"],
+                tools=["broom", "hoe", "hammer"],
+            ),
+            "square": Location("square", "Square", LocationKind.OUTDOOR, ["road"]),
+            "workshop": Location("workshop", "Workshop", LocationKind.INDOOR, ["road"]),
+            "field": Location("field", "Field", LocationKind.OUTDOOR, ["road"]),
+            "grove": Location("grove", "Herb Grove", LocationKind.OUTDOOR, ["road"]),
+        },
+        people={
+            "lin": _town_person("lin", "Lin", "home", ["diligent", "cautious"]),
+            "mara": _town_person("mara", "Mara", "farm_house", ["patient", "practical"]),
+            "tao": _town_person("tao", "Tao", "craft_house", ["focused", "hands-on"]),
+            "nia": _town_person("nia", "Nia", "cottage", ["careful", "social"]),
+            "omar": _town_person("omar", "Omar", "lodge", ["observant", "curious"]),
+            "foreman": Person(
+                id="foreman",
+                name="Foreman",
+                location_id="workshop",
+                home_id="workshop",
+                autonomous=False,
+                profile=Profile(identity="Foreman"),
+            ),
+        },
+        tasks={
+            "clean_square": WorldTask(
+                "clean_square",
+                "Clean the town square",
+                "cleaning",
+                "square",
+                required_tool="broom",
+            ),
+            "tend_field": WorldTask(
+                "tend_field",
+                "Tend the north field",
+                "farming",
+                "field",
+                required_tool="hoe",
+            ),
+            "repair_cart": WorldTask(
+                "repair_cart",
+                "Repair the supply cart",
+                "repair",
+                "workshop",
+                required_tool="hammer",
+            ),
+            "cook_meal": WorldTask(
+                "cook_meal",
+                "Cook a shared meal",
+                "cooking",
+                "cottage",
+            ),
+            "gather_herbs": WorldTask(
+                "gather_herbs",
+                "Gather herbs near the grove",
+                "gathering",
+                "grove",
+            ),
+        },
+    )
+
+    schedule = [
+        ScheduledWorldEvent(
+            at=datetime(2026, 4, 10, 8, 0, 0),
+            name="assign_town_morning_work",
+            callback=_assign_town_morning_work,
+        ),
+    ]
+
+    engine = SimulationEngine(
+        world=world,
+        policy=policy or HeuristicProtoHumanPolicy(),
+        scheduled_events=schedule,
+    )
+    end_time = datetime(2026, 4, 10, 10, 0, 0)
+    return engine, end_time
+
+
 def _assign_clean_square(world: WorldState) -> list[Event]:
     task = world.tasks["clean_square"]
     task.completed = False
@@ -166,6 +266,52 @@ def _assign_clean_square(world: WorldState) -> list[Event]:
             payload={"task_id": "clean_square"},
         )
     ]
+
+
+def _town_person(person_id: str, name: str, home_id: str, traits: list[str]) -> Person:
+    return Person(
+        id=person_id,
+        name=name,
+        location_id=home_id,
+        home_id=home_id,
+        hunger=18,
+        fatigue=12,
+        profile=Profile(
+            identity=name,
+            stable_traits=traits,
+            skills={
+                "navigation": 1,
+                "tool_use": 1,
+            },
+        ),
+    )
+
+
+def _assign_town_morning_work(world: WorldState) -> list[Event]:
+    assignments = [
+        ("lin", "clean_square"),
+        ("mara", "tend_field"),
+        ("tao", "repair_cart"),
+        ("nia", "cook_meal"),
+        ("omar", "gather_herbs"),
+    ]
+    events: list[Event] = []
+    for person_id, task_id in assignments:
+        task = world.tasks[task_id]
+        task.completed = False
+        task.active = True
+        task.progress = 0
+        events.append(
+            Event(
+                event_type=EventType.TASK_ASSIGNED,
+                timestamp=world.current_time,
+                message=f"Foreman assigned {world.people[person_id].name} to {task.name}",
+                actor_id="foreman",
+                target_ids=[person_id],
+                payload={"task_id": task_id},
+            )
+        )
+    return events
 
 
 def _make_rain_start(world: WorldState) -> list[Event]:

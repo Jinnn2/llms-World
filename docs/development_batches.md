@@ -54,9 +54,20 @@ Implemented in `src/web`.
 - Separate frontend data interfaces for locations, roads, terrain, objects,
   items, and replay frames.
 
-Current limitation: the frontend replay is hand-authored data in
-`src/web/data/replay.js`; it is not yet generated from the Python simulation
-artifacts.
+#### B3.1: Artifact-Driven World View
+
+Implemented through `src/digital_human_world/replay_export.py` and
+`validate_v1.py`.
+
+- The Python validation run now exports `world_view_replay.json` into the
+  validation artifact directory.
+- The same run refreshes `src/web/data/generatedReplay.json` for the Vite app.
+- The frontend map still owns visual terrain/object decoration, but locations,
+  road links, replay frames, acceptance status, and metrics come from the
+  simulation export.
+- The public frontend replay metadata omits local endpoint configuration.
+
+Acceptance is covered by `tests/test_replay_export.py`.
 
 ## Mainline Assessment
 
@@ -80,14 +91,16 @@ then expand the world from one autonomous person to a small town.
 
 Goal: make the frontend replay consume real simulation output.
 
-Deliverables:
+Status: complete for the V1 demo.
 
-- Add a replay exporter that converts `engine.event_history` and
+Delivered:
+
+- Added a replay exporter that converts `engine.event_history` and
   `engine.tick_history` into frontend-ready JSON.
-- Replace or supplement `src/web/data/replay.js` with generated replay data.
-- Preserve map asset interfaces for locations, roads, terrain, buildings,
+- Replaced hand-authored replay frames with generated replay data.
+- Preserved map asset interfaces for locations, roads, terrain, buildings,
   items, and people.
-- Add a simple command that regenerates validation artifacts and frontend
+- Added a simple command that regenerates validation artifacts and frontend
   replay data together.
 
 Acceptance:
@@ -100,13 +113,23 @@ Acceptance:
 
 Goal: move from one autonomous individual to a 5-person town MVP.
 
-Deliverables:
+Status: complete for the first deterministic town-day loop.
 
-- Add 5 autonomous people with distinct homes, profiles, and starting roles.
-- Add basic needs: hunger, fatigue, shelter, and simple work obligations.
-- Add location occupancy and proximity-based observations.
-- Add per-person task assignment and independent action scheduling.
-- Keep environment validation authoritative for all actions.
+Delivered:
+
+- Added `build_town_engine()` with 5 autonomous people plus a non-autonomous
+  foreman.
+- Added distinct homes, profile traits, basic hunger/fatigue state, and simple
+  work obligations.
+- Added town tasks for cleaning, farming, repair, cooking, and gathering.
+- Generalized the heuristic policy for assigned tasks beyond `clean_square`.
+- Kept the V1 `clean_square` learning path intact.
+- Added graph-route movement for `GO`, so people advance through road nodes
+  over time instead of teleporting at action completion.
+- Added `events_for_person()` and `build_town_summary()` for per-person logs
+  and B4 acceptance.
+- Added `validate_b4.py` to write B4 artifacts under
+  `artifacts/town_b4/<run-id>/`.
 
 Acceptance:
 
@@ -114,6 +137,8 @@ Acceptance:
 - Each person maintains separate working memory and profile.
 - No person can teleport or act at an invalid location.
 - Event logs can be filtered by person.
+
+Acceptance is covered by `tests/test_town_simulation.py`.
 
 ### B5: Habit Formation
 
@@ -188,9 +213,8 @@ Acceptance:
 
 ## Immediate Recommended Batch
 
-Start with B3.1.
+Start B5.
 
-Reason: the World View is now the user's primary demonstration surface, but it
-is not connected to the backend source of truth. Connecting it to generated
-simulation artifacts will prevent UI drift and create a stable base before
-expanding to multiple people in B4.
+Reason: the project now has the first deterministic 5-person town loop. The
+next mainline step is making repeated experience produce general habit changes,
+instead of relying on fixed V1 consolidation rules.

@@ -183,20 +183,25 @@ class WorldState:
         return self.location(person.location_id).kind is LocationKind.OUTDOOR
 
     def distance_in_ticks(self, start_id: str, end_id: str) -> int:
-        if start_id == end_id:
-            return 1
+        return max(1, len(self.route_between(start_id, end_id)) - 1)
 
+    def route_between(self, start_id: str, end_id: str) -> list[str]:
+        if start_id == end_id:
+            return [start_id]
         frontier: deque[tuple[str, int]] = deque([(start_id, 0)])
+        paths: deque[list[str]] = deque([[start_id]])
         visited = {start_id}
 
         while frontier:
-            location_id, distance = frontier.popleft()
+            location_id, _ = frontier.popleft()
+            path = paths.popleft()
             if location_id == end_id:
-                return max(1, distance)
+                return path
             for neighbor_id in self.location(location_id).neighbors:
                 if neighbor_id in visited:
                     continue
                 visited.add(neighbor_id)
-                frontier.append((neighbor_id, distance + 1))
+                frontier.append((neighbor_id, len(path)))
+                paths.append([*path, neighbor_id])
 
         raise ValueError(f"unreachable location: {start_id} -> {end_id}")

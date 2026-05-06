@@ -67,17 +67,10 @@ class HeuristicProtoHumanPolicy:
                     reason = "working_memory_remembers_rain_exposure"
                 else:
                     reason = "observation_says_it_is_raining"
-                return PolicyDecision(
-                    think="It is raining. I should wait indoors until the weather clears.",
-                    action=ActionPlan(
-                        action_type=ActionType.REST,
-                        target="home",
-                        duration_ticks=3,
-                        label="REST at home while rain passes",
-                        interruptible=True,
-                    ),
-                    reason=reason,
-                    metadata={"policy_source": "heuristic"},
+                return self._rest(
+                    person,
+                    "It is raining. I should wait indoors until the weather clears.",
+                    reason,
                 )
 
         if goal == "clean_square":
@@ -168,6 +161,23 @@ class HeuristicProtoHumanPolicy:
                 metadata={"policy_source": "heuristic"},
             )
 
+        if goal and goal in world.tasks:
+            return self._decide_generic_task(person, observation, world, goal)
+
+        if at_home and person.fatigue >= 55:
+            return self._rest(
+                person,
+                "I am tired. I should recover at home.",
+                "recover_fatigue_at_home",
+            )
+
+        if at_home and person.hunger >= 55:
+            return self._rest(
+                person,
+                "I am hungry. I should eat and recover at home.",
+                "recover_hunger_at_home",
+            )
+
         if not at_home:
             return PolicyDecision(
                 think="I have no active goal. I should go home.",
@@ -191,3 +201,106 @@ class HeuristicProtoHumanPolicy:
             label=f"GO {target_location}",
             interruptible=True,
         )
+
+    def _decide_generic_task(
+        self,
+        person: Person,
+        observation: Observation,
+        world: WorldState,
+        task_id: str,
+    ) -> PolicyDecision:
+        task = world.tasks[task_id]
+        if task.completed:
+            person.working_memory.active_goal = None
+            if person.location_id != person.home_id:
+                return PolicyDecision(
+                    think="My assigned task is complete. I should go home.",
+                    action=self._go(world, person, person.home_id),
+                    reason="assigned_task_completed_go_home",
+                    metadata={"policy_source": "heuristic"},
+                )
+            return self._rest(person, "My assigned task is complete. I can rest.", "assigned_task_done")
+
+        if (
+            observation.weather == Weather.RAIN
+            and world.location(task.location_id).kind.value == "outdoor"
+            and person.location_id == person.home_id
+        ):
+            return self._rest(
+                person,
+                "The task is outside and it is raining. I should wait indoors.",
+                "wait_for_clear_weather_before_outdoor_task",
+            )
+
+        required_tool = task.required_tool
+        if required_tool and required_tool not in person.inventory:
+            source_id = self._find_tool_source(world, required_tool)
+            if person.location_id == source_id and required_tool in observation.visible_tools:
+                return PolicyDecision(
+                    think=f"I need {required_tool}. I should pick it up here.",
+                    action=ActionPlan(
+                        action_type=ActionType.USE,
+                        target=f"{required_tool}_rack",
+                        duration_ticks=1,
+                        label=f"USE {required_tool}_rack",
+                        payload={"tool": required_tool, "source_location": source_id},
+                    ),
+                    reason="pick_up_required_tool_for_assigned_task",
+                    metadata={"policy_source": "heuristic"},
+                )
+            return PolicyDecision(
+                think=f"My task needs {required_tool}. I should get it first.",
+                action=self._go(world, person, source_id),
+                reason="go_get_required_tool_for_assigned_task",
+                metadata={"policy_source": "heuristic"},
+            )
+
+        if person.location_id != task.location_id:
+            return PolicyDecision(
+                think="I should go to the assigned task location.",
+                action=self._go(world, person, task.location_id),
+                reason="go_to_assigned_task_location",
+                metadata={"policy_source": "heuristic"},
+            )
+
+        return PolicyDecision(
+            think="I am at the assigned task location. I should do the work.",
+            action=ActionPlan(
+                action_type=ActionType.DO,
+                target=task.id,
+                duration_ticks=self._duration_for_task(task.kind),
+                label=f"DO {task.id}",
+                payload={"task_id": task.id},
+            ),
+            reason="perform_assigned_task",
+            metadata={"policy_source": "heuristic"},
+        )
+
+    def _rest(self, person: Person, think: str, reason: str) -> PolicyDecision:
+        return PolicyDecision(
+            think=think,
+            action=ActionPlan(
+                action_type=ActionType.REST,
+                target=person.home_id,
+                duration_ticks=3,
+                label=f"REST at {person.home_id}",
+                interruptible=True,
+            ),
+            reason=reason,
+            metadata={"policy_source": "heuristic"},
+        )
+
+    def _find_tool_source(self, world: WorldState, tool: str) -> str:
+        for location in world.locations.values():
+            if tool in location.tools:
+                return location.id
+        return "warehouse" if "warehouse" in world.locations else next(iter(world.locations))
+
+    def _duration_for_task(self, task_kind: str) -> int:
+        return {
+            "cleaning": 6,
+            "farming": 8,
+            "repair": 7,
+            "cooking": 5,
+            "gathering": 4,
+        }.get(task_kind, 5)

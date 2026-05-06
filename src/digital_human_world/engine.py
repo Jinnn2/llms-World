@@ -306,10 +306,24 @@ class SimulationEngine:
             if person.current_action is None:
                 continue
             person.current_action.remaining_ticks -= 1
+            self._advance_go_action_position(person)
             if person.current_action.remaining_ticks > 0:
                 continue
             events.extend(self._resolve_action(person))
         return events
+
+    def _advance_go_action_position(self, person: Person) -> None:
+        action = person.current_action
+        if action is None or action.action_type is not ActionType.GO:
+            return
+        route = action.payload.get("route")
+        if not isinstance(route, list) or not route:
+            return
+        elapsed_ticks = action.total_ticks - action.remaining_ticks
+        route_index = min(elapsed_ticks, len(route) - 1)
+        next_location_id = route[route_index]
+        if next_location_id in self.world.locations:
+            person.location_id = next_location_id
 
     def _resolve_action(self, person: Person) -> list[Event]:
         action = person.current_action
@@ -320,16 +334,26 @@ class SimulationEngine:
         now = self.world.current_time
 
         if action.action_type is ActionType.GO:
-            origin = person.location_id
+            route = action.payload.get("route") or [person.location_id, action.target]
+            origin = route[0]
             person.location_id = action.target
             return [
                 Event(
                     event_type=EventType.ACTION_COMPLETED,
                     timestamp=now,
-                    message=f"{person.name} completed {action.label} and moved from {origin} to {action.target}",
+                    message=(
+                        f"{person.name} completed {action.label} "
+                        f"via {' -> '.join(route)}"
+                    ),
                     actor_id=person.id,
                     target_ids=[person.id],
-                    payload={"action_type": action.action_type, "label": action.label},
+                    payload={
+                        "action_type": action.action_type,
+                        "label": action.label,
+                        "origin_location_id": origin,
+                        "target_location_id": action.target,
+                        "route": list(route),
+                    },
                 )
             ]
 
@@ -424,6 +448,7 @@ class SimulationEngine:
 
         if action.action_type is ActionType.REST:
             person.fatigue = max(0, person.fatigue - 15)
+            person.hunger = max(0, person.hunger - 10)
             person.emotion = "calm"
             return [
                 Event(
@@ -511,7 +536,7 @@ class SimulationEngine:
         if decision.action is None:
             return events
 
-        invalid_reason = self._validate_action_plan(decision.action)
+        invalid_reason = self._validate_action_plan(person, decision.action)
         if invalid_reason:
             events.append(
                 Event(
@@ -541,7 +566,7 @@ class SimulationEngine:
             remaining_ticks=decision.action.duration_ticks,
             label=decision.action.label,
             started_at=self.world.current_time,
-            payload=dict(decision.action.payload),
+            payload=self._build_action_payload(person, decision.action),
             interruptible=decision.action.interruptible,
         )
         events.append(
@@ -561,13 +586,25 @@ class SimulationEngine:
         )
         return events
 
-    def _validate_action_plan(self, action: Any) -> str | None:
+    def _build_action_payload(self, person: Person, action: Any) -> dict[str, Any]:
+        payload = dict(action.payload)
+        if action.action_type is ActionType.GO:
+            payload["route"] = self.world.route_between(person.location_id, action.target)
+        return payload
+
+    def _validate_action_plan(self, person: Person, action: Any) -> str | None:
         if action.duration_ticks < 1:
             return "duration_ticks must be at least 1"
 
         if action.action_type is ActionType.GO:
             if action.target not in self.world.locations:
                 return f"unknown location target: {action.target}"
+            required_ticks = self.world.distance_in_ticks(person.location_id, action.target)
+            if action.duration_ticks < required_ticks:
+                return (
+                    f"GO duration {action.duration_ticks} is shorter than route "
+                    f"distance {required_ticks}"
+                )
             return None
 
         if action.action_type is ActionType.DO:
@@ -577,12 +614,22 @@ class SimulationEngine:
             task = self.world.tasks[task_id]
             if task.completed:
                 return f"task already completed: {task_id}"
+            if person.location_id != task.location_id:
+                return (
+                    f"person at {person.location_id} cannot do task {task_id} "
+                    f"at {task.location_id}"
+                )
             return None
 
         if action.action_type is ActionType.USE:
             source_location_id = action.payload.get("source_location")
             if source_location_id and source_location_id not in self.world.locations:
                 return f"unknown source location: {source_location_id}"
+            if source_location_id and source_location_id != person.location_id:
+                return (
+                    f"person at {person.location_id} cannot use tool source "
+                    f"at {source_location_id}"
+                )
             return None
 
         if action.action_type is ActionType.REST and action.target:
@@ -669,6 +716,8 @@ class SimulationEngine:
                     person_id: {
                         "location_id": person.location_id,
                         "inventory": list(person.inventory),
+                        "hunger": person.hunger,
+                        "fatigue": person.fatigue,
                         "active_goal": person.working_memory.active_goal,
                         "current_intent": person.working_memory.current_intent,
                         "current_action": None

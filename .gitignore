@@ -19,6 +19,7 @@ dist/
 
 # Generated validation outputs
 artifacts/validation/
+artifacts/town_b4/
 
 # OS/editor noise
 .DS_Store
