@@ -26,6 +26,7 @@ import {
   itemObjects,
   links,
   locations,
+  people as replayPeople,
   replayFrames,
   terrainPatches,
   worldObjects,
@@ -61,13 +62,16 @@ export function App() {
   const [zoom, setZoom] = useState(1);
   const [drawers, setDrawers] = useState(drawerDefaults);
   const [characterOpen, setCharacterOpen] = useState(true);
+  const [selectedPersonId, setSelectedPersonId] = useState(replayPeople[0]?.id ?? "lin");
 
   const frame = replayFrames[index];
   const nextFrame = replayFrames[(index + 1) % replayFrames.length];
-  const characterPosition = interpolateLocation(frame, nextFrame, progress);
+  const focusPersonId = frame.focusPersonId ?? selectedPersonId;
+  const characterPosition = interpolatePersonLocation(focusPersonId, frame, nextFrame, progress);
   const displayTime = formatContinuousTime(frame, nextFrame, progress);
-  const displayLocation = formatDisplayLocation(frame, nextFrame, progress);
-  const isMoving = playing && locationsDiffer(frame, nextFrame);
+  const selectedPerson = personFrameById(frame, selectedPersonId) ?? personFrameById(frame, focusPersonId) ?? frameToPerson(frame);
+  const selectedDisplayLocation = formatPersonDisplayLocation(selectedPerson.id, frame, nextFrame, progress);
+  const renderedPeople = peopleForFrame(frame, nextFrame, progress);
   const filteredFrames = useMemo(() => {
     const frames = replayFrames.map((item, sourceIndex) => ({ ...item, sourceIndex }));
     if (dayFilter === "all") return frames;
@@ -120,6 +124,7 @@ export function App() {
     setProgress(0);
     setPlaying(false);
     setCharacterOpen(true);
+    setSelectedPersonId(replayFrames[sourceIndex].focusPersonId ?? selectedPersonId);
   }
 
   function step(delta) {
@@ -133,6 +138,16 @@ export function App() {
     setPlaying(false);
     setProgress(0);
     setIndex(0);
+    setCharacterOpen(true);
+    setSelectedPersonId(replayFrames[0].focusPersonId ?? replayPeople[0]?.id ?? "lin");
+  }
+
+  function toggleCharacter(personId) {
+    if (selectedPersonId === personId) {
+      setCharacterOpen((value) => !value);
+      return;
+    }
+    setSelectedPersonId(personId);
     setCharacterOpen(true);
   }
 
@@ -171,14 +186,17 @@ export function App() {
             {itemObjects.map((object) => (
               <WorldItem key={object.id} object={object} />
             ))}
-            <Character
-              displayLocation={displayLocation}
-              frame={frame}
-              moving={isMoving}
-              open={characterOpen}
-              position={characterPosition}
-              onToggle={() => setCharacterOpen((value) => !value)}
-            />
+            {renderedPeople.map((person) => (
+              <Character
+                displayLocation={person.displayLocation}
+                key={person.id}
+                moving={playing && person.moving}
+                open={characterOpen && selectedPerson.id === person.id}
+                person={person}
+                position={person.position}
+                onToggle={() => toggleCharacter(person.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -226,12 +244,12 @@ export function App() {
 
       <Drawer
         side="right"
-        title="Lin State"
+        title={`${selectedPerson.name} State`}
         icon={<UserRound size={18} />}
         open={drawers.person}
         onClose={() => setDrawer("person", false)}
       >
-        <PersonPanel frame={frame} displayLocation={displayLocation} />
+        <PersonPanel person={selectedPerson} displayLocation={selectedDisplayLocation} />
       </Drawer>
 
       <Drawer
@@ -252,7 +270,7 @@ function WorldHud({ displayTime, frame, index, playing, onTogglePlay, onStep, on
     <header className="worldHud">
       <div className="brandBlock">
         <span>Digital Human World</span>
-        <strong>2D World</strong>
+        <strong>B4 Town</strong>
       </div>
       <div className="hudStats" aria-label="Current world state">
         <HudItem icon={<CalendarDays size={16} />} label="Clock" value={displayTime} />
@@ -373,13 +391,17 @@ function ControlPanel({
       </div>
       <div className="drawerMetric">
         <span>Map Mode</span>
-        <strong>Pure 2D top-down map. Wheel zooms, side buttons pan, and Lin moves only along roads.</strong>
+        <strong>Pure 2D town map. Wheel zooms, side buttons pan, and all people move through exported road routes.</strong>
+      </div>
+      <div className="drawerMetric">
+        <span>Town Population</span>
+        <strong>{replayPeople.length} autonomous people rendered from B4 simulation artifacts.</strong>
       </div>
     </div>
   );
 }
 
-function PersonPanel({ displayLocation, frame }) {
+function PersonPanel({ displayLocation, person }) {
   return (
     <div className="drawerStack">
       <div className="personHero">
@@ -388,24 +410,28 @@ function PersonPanel({ displayLocation, frame }) {
         </div>
         <div>
           <span>Proto-human</span>
-          <strong>Lin</strong>
-          <p>{frame.intent}</p>
+          <strong>{person.name}</strong>
+          <p>{person.intent}</p>
         </div>
       </div>
       <StateGroup title="Bound To Character">
         <KeyValue label="location" value={displayLocation} />
-        <KeyValue label="action" value={frame.action} />
-        <KeyValue label="active_goal" value={frame.activeGoal ?? "none"} />
+        <KeyValue label="action" value={person.action} />
+        <KeyValue label="active_goal" value={person.activeGoal ?? "none"} />
+      </StateGroup>
+      <StateGroup title="Self State">
+        <KeyValue label="hunger" value={String(person.hunger ?? 0)} />
+        <KeyValue label="fatigue" value={String(person.fatigue ?? 0)} />
       </StateGroup>
       <StateGroup title="Working Memory">
-        <NoteList notes={frame.workingNotes} />
+        <NoteList notes={[person.intent, person.action].filter(Boolean)} />
       </StateGroup>
       <StateGroup title="Profile">
-        <TokenList empty="No learned rules yet" items={frame.profileRules} tone="amber" />
-        <TokenList empty="No stable preferences yet" items={frame.profilePreferences} tone="teal" />
+        <TokenList empty="No learned rules yet" items={person.profileRules ?? []} tone="amber" />
+        <TokenList empty="No stable preferences yet" items={person.profilePreferences ?? []} tone="teal" />
       </StateGroup>
       <StateGroup title="Inventory">
-        <TokenList empty="Empty" items={frame.inventory} tone="green" />
+        <TokenList empty="Empty" items={person.inventory ?? []} tone="green" />
       </StateGroup>
     </div>
   );
@@ -470,14 +496,12 @@ function TerrainPatch({ patch }) {
 function RoadNetwork() {
   return (
     <svg className="roadNetwork" viewBox={`0 0 ${WORLD_SIZE.width} ${WORLD_SIZE.height}`} aria-hidden="true">
-      <path d={roadPath(["home", "road", "square"])} />
-      <path d={roadPath(["road", "warehouse"])} />
-      <path d={roadPath(["road", "workshop"])} />
-      <path d={roadPath(["road", "field"])} />
-      <path className="roadCenter" d={roadPath(["home", "road", "square"])} />
-      <path className="roadCenter" d={roadPath(["road", "warehouse"])} />
-      <path className="roadCenter" d={roadPath(["road", "workshop"])} />
-      <path className="roadCenter" d={roadPath(["road", "field"])} />
+      {links.map((link) => (
+        <path key={`road-${link.join("-")}`} d={roadPath(link)} />
+      ))}
+      {links.map((link) => (
+        <path className="roadCenter" key={`road-center-${link.join("-")}`} d={roadPath(link)} />
+      ))}
     </svg>
   );
 }
@@ -542,12 +566,12 @@ function ObjectSprite({ type }) {
   return <span className="spriteSignpost" />;
 }
 
-function Character({ displayLocation, frame, moving, onToggle, open, position }) {
+function Character({ displayLocation, moving, onToggle, open, person, position }) {
   return (
     <div className="characterMount" style={{ left: px(position.x, "x"), top: px(position.y, "y") }}>
       <button
-        className={`characterButton ${moving ? "moving" : ""}`}
-        aria-label={`Lin at ${displayLocation}. Current action ${frame.action}`}
+        className={`characterButton character-${person.id} ${moving ? "moving" : ""}`}
+        aria-label={`${person.name} at ${displayLocation}. Current action ${person.action}`}
         onClick={onToggle}
         type="button"
       >
@@ -560,18 +584,18 @@ function Character({ displayLocation, frame, moving, onToggle, open, position })
           <span className="characterLeg legLeft" />
           <span className="characterLeg legRight" />
         </span>
-        <span className="characterName">Lin</span>
+        <span className="characterName">{person.name}</span>
       </button>
 
       {open ? (
-        <div className="characterPopup" role="dialog" aria-label="Lin character details">
+        <div className="characterPopup" role="dialog" aria-label={`${person.name} character details`}>
           <div className="popupTitle">
             <UserRound size={16} />
-            <strong>Lin</strong>
+            <strong>{person.name}</strong>
           </div>
           <KeyValue label="Location" value={displayLocation} />
-          <KeyValue label="Action" value={frame.action} />
-          <KeyValue label="Intent" value={frame.intent} />
+          <KeyValue label="Action" value={person.action} />
+          <KeyValue label="Intent" value={person.intent} />
         </div>
       ) : null}
     </div>
@@ -659,6 +683,82 @@ function itemIcon(type) {
   if (type === "broomRack") return <Package size={15} />;
   if (type === "taskMarker") return <MapIcon size={15} />;
   return <CloudRain size={15} />;
+}
+
+function personFrameById(frame, personId) {
+  if (!personId) return null;
+  return frame.people?.[personId] ?? null;
+}
+
+function frameToPerson(frame) {
+  return {
+    id: frame.focusPersonId ?? "lin",
+    name: replayPeople.find((person) => person.id === frame.focusPersonId)?.name ?? "Lin",
+    locationId: frame.locationId,
+    action: frame.action,
+    activeGoal: frame.activeGoal,
+    intent: frame.intent,
+    inventory: frame.inventory ?? [],
+    profileRules: frame.profileRules ?? [],
+    profilePreferences: frame.profilePreferences ?? [],
+    hunger: frame.hunger ?? 0,
+    fatigue: frame.fatigue ?? 0,
+  };
+}
+
+function peopleForFrame(current, next, progress) {
+  const ids = new Set([
+    ...Object.keys(current.people ?? {}),
+    ...Object.keys(next.people ?? {}),
+  ]);
+  if (!ids.size) {
+    const fallback = frameToPerson(current);
+    return [
+      {
+        ...fallback,
+        displayLocation: formatDisplayLocation(current, next, progress),
+        moving: locationsDiffer(current, next),
+        position: interpolateLocation(current, next, progress),
+      },
+    ];
+  }
+
+  return [...ids].map((personId) => {
+    const currentPerson = personFrameById(current, personId) ?? personFrameById(next, personId);
+    const nextPerson = personFrameById(next, personId) ?? currentPerson;
+    return {
+      ...currentPerson,
+      displayLocation: formatPersonDisplayLocation(personId, current, next, progress),
+      moving: currentPerson.locationId !== nextPerson.locationId,
+      position: interpolatePersonLocation(personId, current, next, progress),
+    };
+  });
+}
+
+function interpolatePersonLocation(personId, current, next, progress) {
+  const currentPerson = personFrameById(current, personId);
+  const nextPerson = personFrameById(next, personId);
+  if (!currentPerson || !nextPerson) {
+    return interpolateLocation(current, next, progress);
+  }
+  return interpolateLocation(
+    { locationId: currentPerson.locationId },
+    { locationId: nextPerson.locationId },
+    progress,
+  );
+}
+
+function formatPersonDisplayLocation(personId, current, next, progress) {
+  const currentPerson = personFrameById(current, personId);
+  const nextPerson = personFrameById(next, personId);
+  if (!currentPerson || !nextPerson) {
+    return formatDisplayLocation(current, next, progress);
+  }
+  return formatDisplayLocation(
+    { locationId: currentPerson.locationId },
+    { locationId: nextPerson.locationId },
+    progress,
+  );
 }
 
 function locationById(id) {

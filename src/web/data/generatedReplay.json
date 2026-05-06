@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "digital_human_world.validation",
-  "generatedAt": "2026-05-06T17:50:55",
+  "generatedAt": "2026-05-06T18:54:54",
   "runMetadata": {
     "policy_mode": "heuristic",
     "model": null,
@@ -77,15 +77,44 @@
       "road"
     ]
   ],
+  "people": [
+    {
+      "id": "lin",
+      "name": "Lin",
+      "homeId": "home",
+      "autonomous": true,
+      "traits": [
+        "diligent",
+        "cautious"
+      ]
+    }
+  ],
   "replayFrames": [
     {
       "time": "Day 1 08:00:00",
       "timestamp": "2026-04-08T08:00:00",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "TASK_ASSIGNED",
+          "activeGoal": "clean_square",
+          "intent": "Receive assigned goal",
+          "inventory": [],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "home",
-      "action": "GO square",
-      "activeGoal": "clean_square",
+      "action": "TASK_ASSIGNED",
+      "activeGoal": null,
       "intent": "Receive assigned goal",
       "inventory": [],
       "profileRules": [],
@@ -103,9 +132,26 @@
       "timestamp": "2026-04-08T08:00:00",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "I have a cleaning goal. I should inspect the square first.",
+          "inventory": [],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "home",
       "action": "GO square",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I have a cleaning goal. I should inspect the square first.",
       "inventory": [],
       "profileRules": [],
@@ -125,9 +171,26 @@
       "timestamp": "2026-04-08T08:00:20",
       "day": 1,
       "weather": "clear",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square without tool",
+          "activeGoal": "clean_square",
+          "intent": "I should try cleaning the square now.",
+          "inventory": [],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "DO clean_square without tool",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I should try cleaning the square now.",
       "inventory": [],
       "profileRules": [],
@@ -147,9 +210,26 @@
       "timestamp": "2026-04-08T08:00:30",
       "day": 1,
       "weather": "clear",
-      "locationId": "square",
-      "action": "GO warehouse",
-      "activeGoal": "clean_square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "ACTION_FAILED",
+          "activeGoal": "clean_square",
+          "intent": "Handle failed action",
+          "inventory": [],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "ACTION_FAILED",
+      "activeGoal": null,
       "intent": "Handle failed action",
       "inventory": [],
       "profileRules": [],
@@ -168,9 +248,26 @@
       "timestamp": "2026-04-08T08:00:30",
       "day": 1,
       "weather": "clear",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO warehouse",
+          "activeGoal": "clean_square",
+          "intent": "Cleaning the square requires a broom. I should get one first.",
+          "inventory": [],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "GO warehouse",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "Cleaning the square requires a broom. I should get one first.",
       "inventory": [],
       "profileRules": [],
@@ -189,9 +286,26 @@
       "timestamp": "2026-04-08T08:00:50",
       "day": 1,
       "weather": "clear",
-      "locationId": "warehouse",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "USE broom_rack",
+          "activeGoal": "clean_square",
+          "intent": "The broom is here. I should pick it up.",
+          "inventory": [],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "USE broom_rack",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "The broom is here. I should pick it up.",
       "inventory": [],
       "profileRules": [],
@@ -211,9 +325,28 @@
       "timestamp": "2026-04-08T08:01:00",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "TOOL_ACQUIRED",
+          "activeGoal": "clean_square",
+          "intent": "Update inventory",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "warehouse",
-      "action": "GO square",
-      "activeGoal": "clean_square",
+      "action": "TOOL_ACQUIRED",
+      "activeGoal": null,
       "intent": "Update inventory",
       "inventory": [
         "broom"
@@ -233,9 +366,28 @@
       "timestamp": "2026-04-08T08:01:00",
       "day": 1,
       "weather": "clear",
-      "locationId": "warehouse",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "I already have the broom. I should go to the square.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "GO square",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I already have the broom. I should go to the square.",
       "inventory": [
         "broom"
@@ -258,9 +410,28 @@
       "timestamp": "2026-04-08T08:01:20",
       "day": 1,
       "weather": "clear",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "I have the broom and I am at the square. I should clean it now.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "DO clean_square",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I have the broom and I am at the square. I should clean it now.",
       "inventory": [
         "broom"
@@ -282,9 +453,28 @@
       "timestamp": "2026-04-08T08:02:00",
       "day": 1,
       "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "WEATHER_CHANGED",
+          "activeGoal": "clean_square",
+          "intent": "Observe weather change",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "square",
-      "action": "GO home",
-      "activeGoal": "clean_square",
+      "action": "WEATHER_CHANGED",
+      "activeGoal": null,
       "intent": "Observe weather change",
       "inventory": [
         "broom"
@@ -304,10 +494,29 @@
       "time": "Day 1 08:02:00",
       "timestamp": "2026-04-08T08:02:00",
       "day": 1,
-      "weather": "rain",
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "Respond to interruption",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "square",
-      "action": "GO home",
-      "activeGoal": "clean_square",
+      "action": "DO clean_square",
+      "activeGoal": null,
       "intent": "Respond to interruption",
       "inventory": [
         "broom"
@@ -327,9 +536,28 @@
       "timestamp": "2026-04-08T08:02:00",
       "day": 1,
       "weather": "rain",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO home",
+          "activeGoal": "clean_square",
+          "intent": "Rain started while I am outside. I should go home.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "GO home",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "Rain started while I am outside. I should go home.",
       "inventory": [
         "broom"
@@ -352,9 +580,28 @@
       "timestamp": "2026-04-08T08:02:20",
       "day": 1,
       "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "REST at home",
+          "activeGoal": "clean_square",
+          "intent": "It is raining. I should wait indoors until the weather clears.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 10,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "home",
       "action": "REST at home",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "It is raining. I should wait indoors until the weather clears.",
       "inventory": [
         "broom"
@@ -376,9 +623,28 @@
       "timestamp": "2026-04-08T08:03:50",
       "day": 1,
       "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "REST at home",
+          "activeGoal": "clean_square",
+          "intent": "It is raining. I should wait indoors until the weather clears.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "home",
       "action": "REST at home",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "It is raining. I should wait indoors until the weather clears.",
       "inventory": [
         "broom"
@@ -399,9 +665,28 @@
       "timestamp": "2026-04-08T08:05:00",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "WEATHER_CHANGED",
+          "activeGoal": "clean_square",
+          "intent": "Observe weather change",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "home",
-      "action": "REST at home",
-      "activeGoal": "clean_square",
+      "action": "WEATHER_CHANGED",
+      "activeGoal": null,
       "intent": "Observe weather change",
       "inventory": [
         "broom"
@@ -421,9 +706,28 @@
       "timestamp": "2026-04-08T08:05:20",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "I already have the broom. I should go to the square.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "home",
       "action": "GO square",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I already have the broom. I should go to the square.",
       "inventory": [
         "broom"
@@ -444,9 +748,28 @@
       "timestamp": "2026-04-08T08:05:40",
       "day": 1,
       "weather": "clear",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "I have the broom and I am at the square. I should clean it now.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "DO clean_square",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I have the broom and I am at the square. I should clean it now.",
       "inventory": [
         "broom"
@@ -468,8 +791,27 @@
       "timestamp": "2026-04-08T08:06:40",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "square",
-      "action": "GO home",
+      "action": "DO clean_square",
       "activeGoal": null,
       "intent": "Update world state",
       "inventory": [
@@ -490,7 +832,26 @@
       "timestamp": "2026-04-08T08:06:40",
       "day": 1,
       "weather": "clear",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO home",
+          "activeGoal": null,
+          "intent": "I have no active goal. I should go home.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
       "action": "GO home",
       "activeGoal": null,
       "intent": "I have no active goal. I should go home.",
@@ -514,6 +875,25 @@
       "timestamp": "2026-04-08T08:07:00",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
       "locationId": "home",
       "action": "IDLE",
       "activeGoal": null,
@@ -537,18 +917,35 @@
       "time": "Night 21:00:00",
       "timestamp": "2026-04-08T21:00:00",
       "day": 1,
-      "weather": "clear",
+      "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "CONSOLIDATE",
+          "activeGoal": null,
+          "intent": "Night profile update",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
       "action": "CONSOLIDATE",
       "activeGoal": null,
       "intent": "Night profile update",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "learned that square cleaning requires a broom",
         "formed a stable preference to avoid outdoor work in rain"
@@ -563,17 +960,34 @@
       "timestamp": "2026-04-08T21:00:00",
       "day": 1,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "TOOL_RETURNED",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
       "action": "TOOL_RETURNED",
       "activeGoal": null,
       "intent": "Update world state",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "Lin returned broom during nightly reset"
       ],
@@ -587,17 +1001,34 @@
       "timestamp": "2026-04-09T07:59:50",
       "day": 2,
       "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "WEATHER_CHANGED",
+          "activeGoal": null,
+          "intent": "Observe weather change",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
       "action": "WEATHER_CHANGED",
       "activeGoal": null,
       "intent": "Observe weather change",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "weather: rain"
       ],
@@ -611,17 +1042,34 @@
       "timestamp": "2026-04-09T07:59:50",
       "day": 2,
       "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
       "action": "IDLE",
       "activeGoal": null,
       "intent": "Nothing urgent is happening. I can stay idle until something changes.",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: idle_no_action",
         "observation_change:weather changed from clear to rain",
@@ -636,18 +1084,35 @@
       "time": "Day 2 08:00:00",
       "timestamp": "2026-04-09T08:00:00",
       "day": 2,
-      "weather": "rain",
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "TASK_ASSIGNED",
+          "activeGoal": "clean_square",
+          "intent": "Receive assigned goal",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
-      "action": "REST at home",
-      "activeGoal": "clean_square",
+      "action": "TASK_ASSIGNED",
+      "activeGoal": null,
       "intent": "Receive assigned goal",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "task: clean_square"
       ],
@@ -661,17 +1126,34 @@
       "timestamp": "2026-04-09T08:00:00",
       "day": 2,
       "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "REST at home",
+          "activeGoal": "clean_square",
+          "intent": "It is raining. I should wait indoors until the weather clears.",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
       "action": "REST at home",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "It is raining. I should wait indoors until the weather clears.",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: profile_prefers_shelter_in_rain",
         "event:task_assigned"
@@ -686,17 +1168,34 @@
       "timestamp": "2026-04-09T08:03:00",
       "day": 2,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "WEATHER_CHANGED",
+          "activeGoal": "clean_square",
+          "intent": "Observe weather change",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
-      "action": "GO warehouse",
-      "activeGoal": "clean_square",
+      "action": "WEATHER_CHANGED",
+      "activeGoal": null,
       "intent": "Observe weather change",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "weather: clear"
       ],
@@ -709,18 +1208,35 @@
       "time": "Day 2 08:03:00",
       "timestamp": "2026-04-09T08:03:00",
       "day": 2,
-      "weather": "clear",
+      "weather": "rain",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO warehouse",
+          "activeGoal": "clean_square",
+          "intent": "Cleaning the square requires a broom. I should get one first.",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
       "action": "GO warehouse",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "Cleaning the square requires a broom. I should get one first.",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: working_or_long_term_memory_knows_required_tool",
         "observation_change:weather changed from rain to clear",
@@ -737,17 +1253,34 @@
       "timestamp": "2026-04-09T08:03:20",
       "day": 2,
       "weather": "clear",
-      "locationId": "warehouse",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "USE broom_rack",
+          "activeGoal": "clean_square",
+          "intent": "The broom is here. I should pick it up.",
+          "inventory": [],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
+      "locationId": "home",
       "action": "USE broom_rack",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "The broom is here. I should pick it up.",
       "inventory": [],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: pick_up_required_tool",
         "observation_change:location changed from Road to Warehouse; visible tools changed from [] to ['broom', 'broom']",
@@ -763,19 +1296,38 @@
       "timestamp": "2026-04-09T08:03:30",
       "day": 2,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "TOOL_ACQUIRED",
+          "activeGoal": "clean_square",
+          "intent": "Update inventory",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "warehouse",
-      "action": "GO square",
-      "activeGoal": "clean_square",
+      "action": "TOOL_ACQUIRED",
+      "activeGoal": null,
       "intent": "Update inventory",
       "inventory": [
         "broom"
       ],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "tool: broom"
       ],
@@ -789,19 +1341,38 @@
       "timestamp": "2026-04-09T08:03:30",
       "day": 2,
       "weather": "clear",
-      "locationId": "warehouse",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "I already have the broom. I should go to the square.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
+      "locationId": "home",
       "action": "GO square",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I already have the broom. I should go to the square.",
       "inventory": [
         "broom"
       ],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: carry_tool_to_task_site",
         "observation_change:visible tools changed from ['broom', 'broom'] to ['broom']",
@@ -818,19 +1389,38 @@
       "timestamp": "2026-04-09T08:03:50",
       "day": 2,
       "weather": "clear",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "I have the broom and I am at the square. I should clean it now.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 0,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
+      "locationId": "home",
       "action": "DO clean_square",
-      "activeGoal": "clean_square",
+      "activeGoal": null,
       "intent": "I have the broom and I am at the square. I should clean it now.",
       "inventory": [
         "broom"
       ],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: perform_cleaning",
         "observation_change:location changed from Road to Square; visible tasks changed from [] to ['Clean the town square']",
@@ -846,19 +1436,38 @@
       "timestamp": "2026-04-09T08:04:50",
       "day": 2,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "square",
-      "action": "GO home",
+      "action": "DO clean_square",
       "activeGoal": null,
       "intent": "Update world state",
       "inventory": [
         "broom"
       ],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "Lin completed DO clean_square and finished task clean_square"
       ],
@@ -872,19 +1481,38 @@
       "timestamp": "2026-04-09T08:04:50",
       "day": 2,
       "weather": "clear",
-      "locationId": "square",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO home",
+          "activeGoal": null,
+          "intent": "I have no active goal. I should go home.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
+      "locationId": "home",
       "action": "GO home",
       "activeGoal": null,
       "intent": "I have no active goal. I should go home.",
       "inventory": [
         "broom"
       ],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: return_home_when_idle",
         "observation_change:visible tasks changed from ['Clean the town square'] to []",
@@ -900,6 +1528,29 @@
       "timestamp": "2026-04-09T08:05:10",
       "day": 2,
       "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 0,
+          "fatigue": 10,
+          "profileRules": [
+            "clean_square_requires_broom"
+          ],
+          "profilePreferences": [
+            "avoid_outdoor_in_rain"
+          ]
+        }
+      },
       "locationId": "home",
       "action": "IDLE",
       "activeGoal": null,
@@ -907,12 +1558,8 @@
       "inventory": [
         "broom"
       ],
-      "profileRules": [
-        "clean_square_requires_broom"
-      ],
-      "profilePreferences": [
-        "avoid_outdoor_in_rain"
-      ],
+      "profileRules": [],
+      "profilePreferences": [],
       "workingNotes": [
         "reason: idle_no_action",
         "observation_change:location changed from Road to Home",

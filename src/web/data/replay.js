@@ -1,15 +1,23 @@
 import generatedReplay from "./generatedReplay.json";
+import generatedTownReplay from "./generatedTownReplay.json";
 
-export const locations = generatedReplay.locations;
-export const links = generatedReplay.links;
-export const replayFrames = generatedReplay.replayFrames;
-export const metrics = generatedReplay.metrics;
+const activeReplay = generatedTownReplay;
+
+export const locations = activeReplay.locations;
+export const links = activeReplay.links;
+export const people = activeReplay.people ?? [];
+export const replayFrames = activeReplay.replayFrames;
+export const metrics = activeReplay.metrics;
 export const replayMetadata = {
-  schemaVersion: generatedReplay.schemaVersion,
-  source: generatedReplay.source,
-  generatedAt: generatedReplay.generatedAt,
-  acceptance: generatedReplay.acceptance,
-  runMetadata: generatedReplay.runMetadata,
+  schemaVersion: activeReplay.schemaVersion,
+  source: activeReplay.source,
+  generatedAt: activeReplay.generatedAt,
+  acceptance: activeReplay.acceptance,
+  runMetadata: activeReplay.runMetadata,
+};
+export const availableReplays = {
+  v1: generatedReplay,
+  town: generatedTownReplay,
 };
 
 export const terrainPatches = [
@@ -20,17 +28,28 @@ export const terrainPatches = [
   { id: "stone-yard", type: "stone", x: 54, y: 23, w: 13, h: 10 },
 ];
 
-export const worldObjects = [
-  { id: "home-house", type: "house", locationId: "home", x: 15, y: 48, label: "Home" },
-  { id: "warehouse-building", type: "warehouse", locationId: "warehouse", x: 36, y: 18, label: "Warehouse" },
-  { id: "square-fountain", type: "fountain", locationId: "square", x: 63, y: 48, label: "Square" },
-  { id: "workshop-hut", type: "workshop", locationId: "workshop", x: 84, y: 27, label: "Workshop" },
-  { id: "field-plots", type: "fieldRows", locationId: "field", x: 82, y: 74, label: "Field" },
-  { id: "signpost-road", type: "signpost", locationId: "road", x: 38, y: 48, label: "Road" },
-];
+export const worldObjects = locations.map((location) => ({
+  id: `${location.id}-object`,
+  type: objectTypeForLocation(location),
+  locationId: location.id,
+  x: location.x,
+  y: location.y,
+  label: location.name,
+}));
 
 export const itemObjects = [
   { id: "broom-rack", type: "broomRack", locationId: "warehouse", x: 42, y: 21, label: "Broom rack" },
   { id: "task-marker", type: "taskMarker", locationId: "square", x: 67, y: 43, label: "Clean square task" },
   { id: "rain-sensor", type: "weatherSensor", locationId: "road", x: 48, y: 39, label: "Weather trigger" },
 ];
+
+function objectTypeForLocation(location) {
+  if (location.id === "warehouse") return "warehouse";
+  if (location.id === "square") return "fountain";
+  if (location.id === "workshop") return "workshop";
+  if (location.id === "field") return "fieldRows";
+  if (location.id.includes("house") || location.id === "home" || location.id === "cottage" || location.id === "lodge") {
+    return "house";
+  }
+  return "signpost";
+}

@@ -1,0 +1,4156 @@
+{
+  "schemaVersion": 1,
+  "source": "digital_human_world.validation",
+  "generatedAt": "2026-05-06T18:55:32",
+  "runMetadata": {
+    "policy_mode": "heuristic",
+    "model": null,
+    "end_time": "2026-04-10T10:00:00"
+  },
+  "acceptance": {
+    "b4_pass": true,
+    "failures": []
+  },
+  "locations": [
+    {
+      "id": "home",
+      "name": "Lin Home",
+      "kind": "indoor",
+      "x": 15,
+      "y": 48
+    },
+    {
+      "id": "farm_house",
+      "name": "Farm House",
+      "kind": "indoor",
+      "x": 17,
+      "y": 70
+    },
+    {
+      "id": "craft_house",
+      "name": "Craft House",
+      "kind": "indoor",
+      "x": 18,
+      "y": 28
+    },
+    {
+      "id": "cottage",
+      "name": "Cottage",
+      "kind": "indoor",
+      "x": 55,
+      "y": 78
+    },
+    {
+      "id": "lodge",
+      "name": "Lodge",
+      "kind": "indoor",
+      "x": 74,
+      "y": 16
+    },
+    {
+      "id": "road",
+      "name": "Main Road",
+      "kind": "outdoor",
+      "x": 38,
+      "y": 48
+    },
+    {
+      "id": "warehouse",
+      "name": "Warehouse",
+      "kind": "indoor",
+      "x": 36,
+      "y": 18
+    },
+    {
+      "id": "square",
+      "name": "Square",
+      "kind": "outdoor",
+      "x": 63,
+      "y": 48
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop",
+      "kind": "indoor",
+      "x": 84,
+      "y": 27
+    },
+    {
+      "id": "field",
+      "name": "Field",
+      "kind": "outdoor",
+      "x": 82,
+      "y": 74
+    },
+    {
+      "id": "grove",
+      "name": "Herb Grove",
+      "kind": "outdoor",
+      "x": 90,
+      "y": 54
+    }
+  ],
+  "links": [
+    [
+      "home",
+      "road"
+    ],
+    [
+      "farm_house",
+      "road"
+    ],
+    [
+      "craft_house",
+      "road"
+    ],
+    [
+      "cottage",
+      "road"
+    ],
+    [
+      "lodge",
+      "road"
+    ],
+    [
+      "road",
+      "warehouse"
+    ],
+    [
+      "road",
+      "square"
+    ],
+    [
+      "road",
+      "workshop"
+    ],
+    [
+      "field",
+      "road"
+    ],
+    [
+      "grove",
+      "road"
+    ]
+  ],
+  "people": [
+    {
+      "id": "lin",
+      "name": "Lin",
+      "homeId": "home",
+      "autonomous": true,
+      "traits": [
+        "diligent",
+        "cautious"
+      ]
+    },
+    {
+      "id": "mara",
+      "name": "Mara",
+      "homeId": "farm_house",
+      "autonomous": true,
+      "traits": [
+        "patient",
+        "practical"
+      ]
+    },
+    {
+      "id": "tao",
+      "name": "Tao",
+      "homeId": "craft_house",
+      "autonomous": true,
+      "traits": [
+        "focused",
+        "hands-on"
+      ]
+    },
+    {
+      "id": "nia",
+      "name": "Nia",
+      "homeId": "cottage",
+      "autonomous": true,
+      "traits": [
+        "careful",
+        "social"
+      ]
+    },
+    {
+      "id": "omar",
+      "name": "Omar",
+      "homeId": "lodge",
+      "autonomous": true,
+      "traits": [
+        "observant",
+        "curious"
+      ]
+    }
+  ],
+  "replayFrames": [
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "TASK_ASSIGNED",
+          "activeGoal": "clean_square",
+          "intent": "Receive assigned goal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "TASK_ASSIGNED",
+      "activeGoal": null,
+      "intent": "Receive assigned goal",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "task: clean_square"
+      ],
+      "eventType": "task",
+      "event": "Foreman assigned Lin to Clean the town square",
+      "sourceEventType": "task_assigned",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "TASK_ASSIGNED",
+          "activeGoal": "tend_field",
+          "intent": "Receive assigned goal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "TASK_ASSIGNED",
+      "activeGoal": null,
+      "intent": "Receive assigned goal",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "task: tend_field"
+      ],
+      "eventType": "task",
+      "event": "Foreman assigned Mara to Tend the north field",
+      "sourceEventType": "task_assigned",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "TASK_ASSIGNED",
+          "activeGoal": "repair_cart",
+          "intent": "Receive assigned goal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "TASK_ASSIGNED",
+      "activeGoal": null,
+      "intent": "Receive assigned goal",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "task: repair_cart"
+      ],
+      "eventType": "task",
+      "event": "Foreman assigned Tao to Repair the supply cart",
+      "sourceEventType": "task_assigned",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "nia",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "TASK_ASSIGNED",
+          "activeGoal": "cook_meal",
+          "intent": "Receive assigned goal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "TASK_ASSIGNED",
+      "activeGoal": null,
+      "intent": "Receive assigned goal",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "task: cook_meal"
+      ],
+      "eventType": "task",
+      "event": "Foreman assigned Nia to Cook a shared meal",
+      "sourceEventType": "task_assigned",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "omar",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "TASK_ASSIGNED",
+          "activeGoal": "gather_herbs",
+          "intent": "Receive assigned goal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "TASK_ASSIGNED",
+      "activeGoal": null,
+      "intent": "Receive assigned goal",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "task: gather_herbs"
+      ],
+      "eventType": "task",
+      "event": "Foreman assigned Omar to Gather herbs near the grove",
+      "sourceEventType": "task_assigned",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "I have a cleaning goal. I should inspect the square first.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO square",
+      "activeGoal": null,
+      "intent": "I have a cleaning goal. I should inspect the square first.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: inspect_task_site_first",
+        "observation_change:initial observation created",
+        "event:task_assigned"
+      ],
+      "eventType": "decision",
+      "event": "I have a cleaning goal. I should inspect the square first. -> GO square",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "My task needs hoe. I should get it first.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO warehouse",
+      "activeGoal": null,
+      "intent": "My task needs hoe. I should get it first.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: go_get_required_tool_for_assigned_task",
+        "observation_change:initial observation created",
+        "event:task_assigned"
+      ],
+      "eventType": "decision",
+      "event": "My task needs hoe. I should get it first. -> GO warehouse",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "My task needs hammer. I should get it first.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO warehouse",
+      "activeGoal": null,
+      "intent": "My task needs hammer. I should get it first.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: go_get_required_tool_for_assigned_task",
+        "observation_change:initial observation created",
+        "event:task_assigned"
+      ],
+      "eventType": "decision",
+      "event": "My task needs hammer. I should get it first. -> GO warehouse",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "nia",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "I am at the assigned task location. I should do the work.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "GO grove",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "DO cook_meal",
+      "activeGoal": null,
+      "intent": "I am at the assigned task location. I should do the work.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: perform_assigned_task",
+        "observation_change:initial observation created",
+        "event:task_assigned"
+      ],
+      "eventType": "decision",
+      "event": "I am at the assigned task location. I should do the work. -> DO cook_meal",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:00",
+      "timestamp": "2026-04-10T08:00:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "omar",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "GO warehouse",
+          "activeGoal": "tend_field",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "GO warehouse",
+          "activeGoal": "repair_cart",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "GO grove",
+          "activeGoal": "gather_herbs",
+          "intent": "I should go to the assigned task location.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO grove",
+      "activeGoal": null,
+      "intent": "I should go to the assigned task location.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: go_to_assigned_task_location",
+        "observation_change:initial observation created",
+        "event:task_assigned"
+      ],
+      "eventType": "decision",
+      "event": "I should go to the assigned task location. -> GO grove",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:20",
+      "timestamp": "2026-04-10T08:00:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square without tool",
+          "activeGoal": "clean_square",
+          "intent": "I should try cleaning the square now.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "USE hoe_rack",
+          "activeGoal": "tend_field",
+          "intent": "USE hoe_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "USE hammer_rack",
+          "activeGoal": "repair_cart",
+          "intent": "USE hammer_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "DO clean_square without tool",
+      "activeGoal": null,
+      "intent": "I should try cleaning the square now.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: attempt_task_without_rule",
+        "observation_change:location changed from Main Road to Square; visible tasks changed from [] to ['Clean the town square']; visible people changed from ['Mara', 'Omar', 'Tao'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I should try cleaning the square now. -> DO clean_square without tool",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:20",
+      "timestamp": "2026-04-10T08:00:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square without tool",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square without tool",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "USE hoe_rack",
+          "activeGoal": "tend_field",
+          "intent": "I need hoe. I should pick it up here.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "USE hammer_rack",
+          "activeGoal": "repair_cart",
+          "intent": "USE hammer_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "USE hoe_rack",
+      "activeGoal": null,
+      "intent": "I need hoe. I should pick it up here.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: pick_up_required_tool_for_assigned_task",
+        "observation_change:location changed from Main Road to Warehouse; visible tools changed from [] to ['broom', 'hoe', 'hammer']; visible people changed from ['Lin', 'Omar', 'Tao'] to ['Tao']",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I need hoe. I should pick it up here. -> USE hoe_rack",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:20",
+      "timestamp": "2026-04-10T08:00:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square without tool",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square without tool",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "USE hoe_rack",
+          "activeGoal": "tend_field",
+          "intent": "USE hoe_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "USE hammer_rack",
+          "activeGoal": "repair_cart",
+          "intent": "I need hammer. I should pick it up here.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "USE hammer_rack",
+      "activeGoal": null,
+      "intent": "I need hammer. I should pick it up here.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: pick_up_required_tool_for_assigned_task",
+        "observation_change:location changed from Main Road to Warehouse; visible tools changed from [] to ['broom', 'hoe', 'hammer']; visible people changed from ['Lin', 'Mara', 'Omar'] to ['Mara']",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I need hammer. I should pick it up here. -> USE hammer_rack",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:20",
+      "timestamp": "2026-04-10T08:00:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "omar",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square without tool",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square without tool",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "USE hoe_rack",
+          "activeGoal": "tend_field",
+          "intent": "USE hoe_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "USE hammer_rack",
+          "activeGoal": "repair_cart",
+          "intent": "USE hammer_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "I am at the assigned task location. I should do the work.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "DO gather_herbs",
+      "activeGoal": null,
+      "intent": "I am at the assigned task location. I should do the work.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: perform_assigned_task",
+        "observation_change:location changed from Main Road to Herb Grove; visible tasks changed from [] to ['Gather herbs near the grove']; visible people changed from ['Lin', 'Mara', 'Tao'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I am at the assigned task location. I should do the work. -> DO gather_herbs",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:30",
+      "timestamp": "2026-04-10T08:00:30",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "ACTION_FAILED",
+          "activeGoal": "clean_square",
+          "intent": "Handle failed action",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "GO field",
+          "activeGoal": "tend_field",
+          "intent": "GO field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "GO workshop",
+          "activeGoal": "repair_cart",
+          "intent": "GO workshop",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "ACTION_FAILED",
+      "activeGoal": null,
+      "intent": "Handle failed action",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "failure: missing_tool",
+        "required_tool: broom"
+      ],
+      "eventType": "failure",
+      "event": "Lin failed DO clean_square without tool because broom is missing",
+      "sourceEventType": "action_failed",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:30",
+      "timestamp": "2026-04-10T08:00:30",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO warehouse",
+          "activeGoal": "clean_square",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "TOOL_ACQUIRED",
+          "activeGoal": "tend_field",
+          "intent": "Update inventory",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "GO workshop",
+          "activeGoal": "repair_cart",
+          "intent": "GO workshop",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "warehouse",
+      "action": "TOOL_ACQUIRED",
+      "activeGoal": null,
+      "intent": "Update inventory",
+      "inventory": [
+        "hoe"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "tool: hoe"
+      ],
+      "eventType": "tool",
+      "event": "Mara acquired hoe from warehouse",
+      "sourceEventType": "tool_acquired",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:30",
+      "timestamp": "2026-04-10T08:00:30",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO warehouse",
+          "activeGoal": "clean_square",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "GO field",
+          "activeGoal": "tend_field",
+          "intent": "GO field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "TOOL_ACQUIRED",
+          "activeGoal": "repair_cart",
+          "intent": "Update inventory",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "warehouse",
+      "action": "TOOL_ACQUIRED",
+      "activeGoal": null,
+      "intent": "Update inventory",
+      "inventory": [
+        "hammer"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "tool: hammer"
+      ],
+      "eventType": "tool",
+      "event": "Tao acquired hammer from warehouse",
+      "sourceEventType": "tool_acquired",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:30",
+      "timestamp": "2026-04-10T08:00:30",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO warehouse",
+          "activeGoal": "clean_square",
+          "intent": "Cleaning the square requires a broom. I should get one first.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "GO field",
+          "activeGoal": "tend_field",
+          "intent": "GO field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "GO workshop",
+          "activeGoal": "repair_cart",
+          "intent": "GO workshop",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO warehouse",
+      "activeGoal": null,
+      "intent": "Cleaning the square requires a broom. I should get one first.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: working_or_long_term_memory_knows_required_tool",
+        "event:action_failed"
+      ],
+      "eventType": "decision",
+      "event": "Cleaning the square requires a broom. I should get one first. -> GO warehouse",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:30",
+      "timestamp": "2026-04-10T08:00:30",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO warehouse",
+          "activeGoal": "clean_square",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "GO field",
+          "activeGoal": "tend_field",
+          "intent": "I should go to the assigned task location.",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "GO workshop",
+          "activeGoal": "repair_cart",
+          "intent": "GO workshop",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO field",
+      "activeGoal": null,
+      "intent": "I should go to the assigned task location.",
+      "inventory": [
+        "hoe"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: go_to_assigned_task_location",
+        "observation_change:visible tools changed from ['broom', 'hoe', 'hammer'] to ['broom']",
+        "event:tool_acquired",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I should go to the assigned task location. -> GO field",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:30",
+      "timestamp": "2026-04-10T08:00:30",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO warehouse",
+          "activeGoal": "clean_square",
+          "intent": "GO warehouse",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "warehouse",
+          "homeId": "farm_house",
+          "action": "GO field",
+          "activeGoal": "tend_field",
+          "intent": "GO field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "warehouse",
+          "homeId": "craft_house",
+          "action": "GO workshop",
+          "activeGoal": "repair_cart",
+          "intent": "I should go to the assigned task location.",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": "cook_meal",
+          "intent": "DO cook_meal",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO workshop",
+      "activeGoal": null,
+      "intent": "I should go to the assigned task location.",
+      "inventory": [
+        "hammer"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: go_to_assigned_task_location",
+        "observation_change:visible tools changed from ['broom', 'hoe', 'hammer'] to ['broom']",
+        "event:tool_acquired",
+        "event:tool_acquired"
+      ],
+      "eventType": "decision",
+      "event": "I should go to the assigned task location. -> GO workshop",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:50",
+      "timestamp": "2026-04-10T08:00:50",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "nia",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "USE broom_rack",
+          "activeGoal": "clean_square",
+          "intent": "USE broom_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "DO cook_meal",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "cottage",
+      "action": "DO cook_meal",
+      "activeGoal": null,
+      "intent": "Update world state",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "Nia completed DO cook_meal and finished task cook_meal"
+      ],
+      "eventType": "complete",
+      "event": "Nia completed DO cook_meal and finished task cook_meal",
+      "sourceEventType": "action_completed",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:50",
+      "timestamp": "2026-04-10T08:00:50",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "USE broom_rack",
+          "activeGoal": "clean_square",
+          "intent": "The broom is here. I should pick it up.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "USE broom_rack",
+      "activeGoal": null,
+      "intent": "The broom is here. I should pick it up.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: pick_up_required_tool",
+        "observation_change:location changed from Main Road to Warehouse; visible tools changed from [] to ['broom']; visible people changed from ['Mara', 'Tao'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "The broom is here. I should pick it up. -> USE broom_rack",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:50",
+      "timestamp": "2026-04-10T08:00:50",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "USE broom_rack",
+          "activeGoal": "clean_square",
+          "intent": "USE broom_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "I am at the assigned task location. I should do the work.",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "DO tend_field",
+      "activeGoal": null,
+      "intent": "I am at the assigned task location. I should do the work.",
+      "inventory": [
+        "hoe"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: perform_assigned_task",
+        "observation_change:location changed from Main Road to Field; visible tasks changed from [] to ['Tend the north field']; visible people changed from ['Lin', 'Tao'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I am at the assigned task location. I should do the work. -> DO tend_field",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:50",
+      "timestamp": "2026-04-10T08:00:50",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "USE broom_rack",
+          "activeGoal": "clean_square",
+          "intent": "USE broom_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "I am at the assigned task location. I should do the work.",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "DO repair_cart",
+      "activeGoal": null,
+      "intent": "I am at the assigned task location. I should do the work.",
+      "inventory": [
+        "hammer"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: perform_assigned_task",
+        "observation_change:location changed from Main Road to Workshop; visible tasks changed from [] to ['Repair the supply cart']; visible people changed from ['Lin', 'Mara'] to ['Foreman']",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I am at the assigned task location. I should do the work. -> DO repair_cart",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:00:50",
+      "timestamp": "2026-04-10T08:00:50",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "nia",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "USE broom_rack",
+          "activeGoal": "clean_square",
+          "intent": "USE broom_rack",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": "gather_herbs",
+          "intent": "DO gather_herbs",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "IDLE",
+      "activeGoal": null,
+      "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: idle_no_action",
+        "observation_change:visible tasks changed from ['Cook a shared meal'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "Nothing urgent is happening. I can stay idle until something changes. -> idle",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:01:00",
+      "timestamp": "2026-04-10T08:01:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "TOOL_ACQUIRED",
+          "activeGoal": "clean_square",
+          "intent": "Update inventory",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "GO lodge",
+          "activeGoal": null,
+          "intent": "GO lodge",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "warehouse",
+      "action": "TOOL_ACQUIRED",
+      "activeGoal": null,
+      "intent": "Update inventory",
+      "inventory": [
+        "broom"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "tool: broom"
+      ],
+      "eventType": "tool",
+      "event": "Lin acquired broom from warehouse",
+      "sourceEventType": "tool_acquired",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:01:00",
+      "timestamp": "2026-04-10T08:01:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "omar",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "DO gather_herbs",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "grove",
+      "action": "DO gather_herbs",
+      "activeGoal": null,
+      "intent": "Update world state",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "Omar completed DO gather_herbs and finished task gather_herbs"
+      ],
+      "eventType": "complete",
+      "event": "Omar completed DO gather_herbs and finished task gather_herbs",
+      "sourceEventType": "action_completed",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:01:00",
+      "timestamp": "2026-04-10T08:01:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "I already have the broom. I should go to the square.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "GO lodge",
+          "activeGoal": null,
+          "intent": "GO lodge",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO square",
+      "activeGoal": null,
+      "intent": "I already have the broom. I should go to the square.",
+      "inventory": [
+        "broom"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: carry_tool_to_task_site",
+        "observation_change:visible tools changed from ['broom'] to []",
+        "event:tool_acquired",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I already have the broom. I should go to the square. -> GO square",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:01:00",
+      "timestamp": "2026-04-10T08:01:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "omar",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "warehouse",
+          "homeId": "home",
+          "action": "GO square",
+          "activeGoal": "clean_square",
+          "intent": "GO square",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "grove",
+          "homeId": "lodge",
+          "action": "GO lodge",
+          "activeGoal": null,
+          "intent": "I have no active goal. I should go home.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO lodge",
+      "activeGoal": null,
+      "intent": "I have no active goal. I should go home.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: return_home_when_idle",
+        "observation_change:visible tasks changed from ['Gather herbs near the grove'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I have no active goal. I should go home. -> GO lodge",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:01:20",
+      "timestamp": "2026-04-10T08:01:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "I have the broom and I am at the square. I should clean it now.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "DO clean_square",
+      "activeGoal": null,
+      "intent": "I have the broom and I am at the square. I should clean it now.",
+      "inventory": [
+        "broom"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: perform_cleaning",
+        "observation_change:location changed from Main Road to Square; visible tasks changed from [] to ['Clean the town square']; visible people changed from ['Omar'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I have the broom and I am at the square. I should clean it now. -> DO clean_square",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:01:20",
+      "timestamp": "2026-04-10T08:01:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "omar",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": "repair_cart",
+          "intent": "DO repair_cart",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "IDLE",
+      "activeGoal": null,
+      "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+      "inventory": [],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: idle_no_action",
+        "observation_change:location changed from Main Road to Lodge; visible people changed from ['Lin'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "Nothing urgent is happening. I can stay idle until something changes. -> idle",
+      "sourceEventType": "decision",
+      "durationMs": 1800
+    },
+    {
+      "time": "Day 1 08:02:00",
+      "timestamp": "2026-04-10T08:02:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "DO repair_cart",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "workshop",
+      "action": "DO repair_cart",
+      "activeGoal": null,
+      "intent": "Update world state",
+      "inventory": [
+        "hammer"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "Tao completed DO repair_cart and finished task repair_cart"
+      ],
+      "eventType": "complete",
+      "event": "Tao completed DO repair_cart and finished task repair_cart",
+      "sourceEventType": "action_completed",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:00",
+      "timestamp": "2026-04-10T08:02:00",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": "tend_field",
+          "intent": "DO tend_field",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "workshop",
+          "homeId": "craft_house",
+          "action": "GO craft_house",
+          "activeGoal": null,
+          "intent": "I have no active goal. I should go home.",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO craft_house",
+      "activeGoal": null,
+      "intent": "I have no active goal. I should go home.",
+      "inventory": [
+        "hammer"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: return_home_when_idle",
+        "observation_change:visible tasks changed from ['Repair the supply cart'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I have no active goal. I should go home. -> GO craft_house",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:10",
+      "timestamp": "2026-04-10T08:02:10",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "DO tend_field",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "road",
+          "homeId": "craft_house",
+          "action": "GO craft_house",
+          "activeGoal": null,
+          "intent": "GO craft_house",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "field",
+      "action": "DO tend_field",
+      "activeGoal": null,
+      "intent": "Update world state",
+      "inventory": [
+        "hoe"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "Mara completed DO tend_field and finished task tend_field"
+      ],
+      "eventType": "complete",
+      "event": "Mara completed DO tend_field and finished task tend_field",
+      "sourceEventType": "action_completed",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:10",
+      "timestamp": "2026-04-10T08:02:10",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": "clean_square",
+          "intent": "DO clean_square",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 12,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "field",
+          "homeId": "farm_house",
+          "action": "GO farm_house",
+          "activeGoal": null,
+          "intent": "I have no active goal. I should go home.",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "road",
+          "homeId": "craft_house",
+          "action": "GO craft_house",
+          "activeGoal": null,
+          "intent": "GO craft_house",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO farm_house",
+      "activeGoal": null,
+      "intent": "I have no active goal. I should go home.",
+      "inventory": [
+        "hoe"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: return_home_when_idle",
+        "observation_change:visible tasks changed from ['Tend the north field'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I have no active goal. I should go home. -> GO farm_house",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:20",
+      "timestamp": "2026-04-10T08:02:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "DO clean_square",
+          "activeGoal": null,
+          "intent": "Update world state",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "road",
+          "homeId": "farm_house",
+          "action": "GO farm_house",
+          "activeGoal": null,
+          "intent": "GO farm_house",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "square",
+      "action": "DO clean_square",
+      "activeGoal": null,
+      "intent": "Update world state",
+      "inventory": [
+        "broom"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "Lin completed DO clean_square and finished task clean_square"
+      ],
+      "eventType": "complete",
+      "event": "Lin completed DO clean_square and finished task clean_square",
+      "sourceEventType": "action_completed",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:20",
+      "timestamp": "2026-04-10T08:02:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO home",
+          "activeGoal": null,
+          "intent": "I have no active goal. I should go home.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "road",
+          "homeId": "farm_house",
+          "action": "GO farm_house",
+          "activeGoal": null,
+          "intent": "GO farm_house",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "GO home",
+      "activeGoal": null,
+      "intent": "I have no active goal. I should go home.",
+      "inventory": [
+        "broom"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: return_home_when_idle",
+        "observation_change:visible tasks changed from ['Clean the town square'] to []",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "I have no active goal. I should go home. -> GO home",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:20",
+      "timestamp": "2026-04-10T08:02:20",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "tao",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "square",
+          "homeId": "home",
+          "action": "GO home",
+          "activeGoal": null,
+          "intent": "GO home",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "road",
+          "homeId": "farm_house",
+          "action": "GO farm_house",
+          "activeGoal": null,
+          "intent": "GO farm_house",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "IDLE",
+      "activeGoal": null,
+      "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+      "inventory": [
+        "hammer"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: idle_no_action",
+        "observation_change:location changed from Main Road to Craft House",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "Nothing urgent is happening. I can stay idle until something changes. -> idle",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:30",
+      "timestamp": "2026-04-10T08:02:30",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "mara",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "road",
+          "homeId": "home",
+          "action": "GO home",
+          "activeGoal": null,
+          "intent": "GO home",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "IDLE",
+      "activeGoal": null,
+      "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+      "inventory": [
+        "hoe"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: idle_no_action",
+        "observation_change:location changed from Main Road to Farm House",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "Nothing urgent is happening. I can stay idle until something changes. -> idle",
+      "sourceEventType": "decision",
+      "durationMs": 900
+    },
+    {
+      "time": "Day 1 08:02:40",
+      "timestamp": "2026-04-10T08:02:40",
+      "day": 1,
+      "weather": "clear",
+      "focusPersonId": "lin",
+      "people": {
+        "lin": {
+          "id": "lin",
+          "name": "Lin",
+          "locationId": "home",
+          "homeId": "home",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+          "inventory": [
+            "broom"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "mara": {
+          "id": "mara",
+          "name": "Mara",
+          "locationId": "farm_house",
+          "homeId": "farm_house",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [
+            "hoe"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "tao": {
+          "id": "tao",
+          "name": "Tao",
+          "locationId": "craft_house",
+          "homeId": "craft_house",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [
+            "hammer"
+          ],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "nia": {
+          "id": "nia",
+          "name": "Nia",
+          "locationId": "cottage",
+          "homeId": "cottage",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        },
+        "omar": {
+          "id": "omar",
+          "name": "Omar",
+          "locationId": "lodge",
+          "homeId": "lodge",
+          "action": "IDLE",
+          "activeGoal": null,
+          "intent": "Idle",
+          "inventory": [],
+          "hunger": 18,
+          "fatigue": 22,
+          "profileRules": [],
+          "profilePreferences": []
+        }
+      },
+      "locationId": "home",
+      "action": "IDLE",
+      "activeGoal": null,
+      "intent": "Nothing urgent is happening. I can stay idle until something changes.",
+      "inventory": [
+        "broom"
+      ],
+      "profileRules": [],
+      "profilePreferences": [],
+      "workingNotes": [
+        "reason: idle_no_action",
+        "observation_change:location changed from Main Road to Lin Home",
+        "event:action_completed"
+      ],
+      "eventType": "decision",
+      "event": "Nothing urgent is happening. I can stay idle until something changes. -> idle",
+      "sourceEventType": "decision",
+      "durationMs": 1800
+    }
+  ],
+  "metrics": [
+    {
+      "label": "B4 acceptance",
+      "value": "PASS",
+      "tone": "green"
+    },
+    {
+      "label": "Replay frames",
+      "value": "40",
+      "tone": "indigo"
+    },
+    {
+      "label": "Policy",
+      "value": "heuristic",
+      "tone": "teal"
+    },
+    {
+      "label": "Decisions",
+      "value": "26",
+      "tone": "amber"
+    }
+  ]
+}

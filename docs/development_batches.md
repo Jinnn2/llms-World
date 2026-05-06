@@ -140,6 +140,16 @@ Acceptance:
 
 Acceptance is covered by `tests/test_town_simulation.py`.
 
+UI track:
+
+- Status: complete for the first B4 town replay.
+- B4 World View renders the 5-person town replay exported by
+  `validate_b4.py`.
+- It shows all autonomous people on the map at once, keeps click-to-inspect
+  state bound to each person, and use the backend road graph for movement.
+- The UI source of truth is `src/web/data/generatedTownReplay.json`, generated
+  from B4 artifacts rather than hand-authored frames.
+
 ### B5: Habit Formation
 
 Goal: make repeated experience produce stable behavior beyond one hard-coded
@@ -158,6 +168,12 @@ Acceptance:
 - A bad repeated outcome suppresses a future action.
 - Habit changes are visible in validation summary and World View.
 
+UI track:
+
+- Add habit badges and before/after routine comparison in the person drawer.
+- Timeline cards should mark habit-forming evidence and promoted habits.
+- World View should expose per-person habit state without hiding the map.
+
 ### B6: Skill Learning
 
 Goal: give `LEARN` and skill profiles operational meaning.
@@ -175,6 +191,12 @@ Acceptance:
 - Skill state changes task outcome or duration.
 - Tests prove the environment, not the policy, determines success.
 
+UI track:
+
+- Add skill bars or compact level indicators to each person profile.
+- Show task duration or success changes caused by skill state.
+- Visualize `LEARN` events distinctly from ordinary `DO` work.
+
 ### B7: Social Layer
 
 Goal: start forming social digital humans rather than isolated agents.
@@ -191,6 +213,12 @@ Acceptance:
 - One person can warn or instruct another through an environment event.
 - The listener's working memory changes immediately.
 - Consolidation can preserve a social preference or learned rule.
+
+UI track:
+
+- Show local speech/listener propagation on the map.
+- Add relationship and recent-contact panels per person.
+- Timeline should support filtering by speaker, listener, and location.
 
 ### B8: Parametric Memory Research Track
 
@@ -210,6 +238,13 @@ Acceptance:
 - The system can produce clean training/evaluation records from simulation.
 - The same scenario can compare heuristic, prompted-model, and trained-model
   policies through one validation harness.
+
+UI track:
+
+- Add run comparison for heuristic, prompted-model, and trained-model policies.
+- Expose evaluation prompts, expected behaviors, and observed divergences.
+- Keep training/export artifacts inspectable from the UI without making the UI
+  responsible for model training.
 
 ## Immediate Recommended Batch
 

@@ -170,6 +170,10 @@ def build_town_summary(
     *,
     run_metadata: dict[str, Any],
 ) -> dict[str, Any]:
+    counts = Counter(event.event_type.value for event in engine.event_history)
+    decision_events = [
+        event for event in engine.event_history if event.event_type is EventType.DECISION
+    ]
     autonomous_people = [
         person for person in engine.world.people.values() if person.autonomous
     ]
@@ -196,6 +200,10 @@ def build_town_summary(
 
     return {
         "run_metadata": run_metadata,
+        "event_counts": dict(counts),
+        "decision_stats": {
+            "total": len(decision_events),
+        },
         "autonomous_people": [
             {
                 "id": person.id,

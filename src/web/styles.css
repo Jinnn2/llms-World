@@ -355,6 +355,22 @@ button {
   animation: walkBob 520ms ease-in-out infinite;
 }
 
+.character-mara .characterBody {
+  background: linear-gradient(135deg, #34d399, #047857);
+}
+
+.character-tao .characterBody {
+  background: linear-gradient(135deg, #fb923c, #c2410c);
+}
+
+.character-nia .characterBody {
+  background: linear-gradient(135deg, #f472b6, #be185d);
+}
+
+.character-omar .characterBody {
+  background: linear-gradient(135deg, #a78bfa, #6d28d9);
+}
+
 .characterHead {
   position: absolute;
   left: 8px;

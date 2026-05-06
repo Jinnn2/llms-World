@@ -11,11 +11,16 @@ from .models import Event, EventType, LocationKind, Weather
 
 _LOCATION_LAYOUT: dict[str, tuple[int, int]] = {
     "home": (15, 48),
+    "farm_house": (17, 70),
+    "craft_house": (18, 28),
+    "cottage": (55, 78),
+    "lodge": (74, 16),
     "road": (38, 48),
     "warehouse": (36, 18),
     "square": (63, 48),
     "workshop": (84, 27),
     "field": (82, 74),
+    "grove": (90, 54),
 }
 
 
@@ -49,6 +54,7 @@ def build_world_view_replay(
         "acceptance": summary.get("acceptance", {}),
         "locations": _build_locations(engine),
         "links": _build_links(engine),
+        "people": _build_people(engine),
         "replayFrames": frames,
         "metrics": _build_metrics(summary, frames),
     }
@@ -91,6 +97,20 @@ def _build_links(engine: SimulationEngine) -> list[list[str]]:
     return links
 
 
+def _build_people(engine: SimulationEngine) -> list[dict[str, Any]]:
+    return [
+        {
+            "id": person.id,
+            "name": person.name,
+            "homeId": person.home_id,
+            "autonomous": person.autonomous,
+            "traits": list(person.profile.stable_traits),
+        }
+        for person in engine.world.people.values()
+        if person.autonomous
+    ]
+
+
 def _build_replay_frames(engine: SimulationEngine) -> list[dict[str, Any]]:
     if not engine.event_history:
         return []
@@ -101,26 +121,29 @@ def _build_replay_frames(engine: SimulationEngine) -> list[dict[str, Any]]:
     }
 
     frames = []
-    previous_rest_reason: str | None = None
-    previous_rest_location: str | None = None
+    previous_rest_reason_by_person: dict[str, str | None] = {}
 
     for event in engine.event_history:
         if not _should_include_event(event):
             continue
-        if _is_repeated_rest_decision(event, previous_rest_reason, previous_rest_location):
-            continue
 
         tick = tick_by_timestamp.get(event.timestamp.isoformat())
-        person_state = _person_state(tick)
-        frame = _frame_from_event(event, person_state, first_day)
+        focus_person_id = _focus_person_id(engine, event)
+        if _is_repeated_rest_decision(
+            event,
+            previous_rest_reason_by_person.get(focus_person_id),
+        ):
+            continue
+
+        people_state = _people_state(engine, tick)
+        person_state = people_state.get(focus_person_id, _person_state(tick))
+        frame = _frame_from_event(event, person_state, people_state, focus_person_id, first_day)
         frames.append(frame)
 
         if event.event_type is EventType.DECISION and frame["action"].startswith("REST"):
-            previous_rest_reason = event.payload.get("reason")
-            previous_rest_location = frame["locationId"]
+            previous_rest_reason_by_person[focus_person_id] = event.payload.get("reason")
         elif event.event_type is not EventType.ACTION_COMPLETED:
-            previous_rest_reason = None
-            previous_rest_location = None
+            previous_rest_reason_by_person[focus_person_id] = None
 
     _apply_frame_durations(frames)
     return frames
@@ -146,9 +169,7 @@ def _should_include_event(event: Event) -> bool:
 def _is_repeated_rest_decision(
     event: Event,
     previous_rest_reason: str | None,
-    previous_rest_location: str | None,
 ) -> bool:
-    del previous_rest_location
     if event.event_type is not EventType.DECISION:
         return False
     action = event.payload.get("action") or {}
@@ -160,6 +181,19 @@ def _is_repeated_rest_decision(
     return previous_rest_reason == event.payload.get("reason")
 
 
+def _focus_person_id(engine: SimulationEngine, event: Event) -> str:
+    if event.actor_id and event.actor_id in engine.world.people:
+        if engine.world.people[event.actor_id].autonomous:
+            return event.actor_id
+    for target_id in event.target_ids:
+        if target_id in engine.world.people and engine.world.people[target_id].autonomous:
+            return target_id
+    for person in engine.world.people.values():
+        if person.autonomous:
+            return person.id
+    return "lin"
+
+
 def _person_state(tick: dict[str, Any] | None, person_id: str = "lin") -> dict[str, Any]:
     if tick is None:
         return {}
@@ -168,9 +202,35 @@ def _person_state(tick: dict[str, Any] | None, person_id: str = "lin") -> dict[s
     return state
 
 
+def _people_state(engine: SimulationEngine, tick: dict[str, Any] | None) -> dict[str, Any]:
+    states: dict[str, Any] = {}
+    for person in engine.world.people.values():
+        if not person.autonomous:
+            continue
+        state = _person_state(tick, person.id)
+        current_action = state.get("current_action") or {}
+        states[person.id] = {
+            "id": person.id,
+            "name": person.name,
+            "locationId": state.get("location_id") or person.location_id,
+            "homeId": person.home_id,
+            "action": current_action.get("label") or "IDLE",
+            "activeGoal": state.get("active_goal"),
+            "intent": state.get("current_intent") or current_action.get("label") or "Idle",
+            "inventory": list(state.get("inventory") or []),
+            "hunger": state.get("hunger", person.hunger),
+            "fatigue": state.get("fatigue", person.fatigue),
+            "profileRules": sorted((state.get("profile_rules") or {}).keys()),
+            "profilePreferences": sorted((state.get("profile_preferences") or {}).keys()),
+        }
+    return states
+
+
 def _frame_from_event(
     event: Event,
     person_state: dict[str, Any],
+    people_state: dict[str, Any],
+    focus_person_id: str,
     first_day: datetime.date,
 ) -> dict[str, Any]:
     timestamp = event.timestamp
@@ -191,6 +251,8 @@ def _frame_from_event(
         "timestamp": timestamp.isoformat(),
         "day": (timestamp.date() - first_day).days + 1,
         "weather": _weather_value(event, person_state),
+        "focusPersonId": focus_person_id,
+        "people": _people_for_frame(event, people_state, focus_person_id, action),
         "locationId": location_id,
         "action": action,
         "activeGoal": person_state.get("active_goal"),
@@ -203,6 +265,19 @@ def _frame_from_event(
         "event": _event_text(event),
         "sourceEventType": event.event_type.value,
     }
+
+
+def _people_for_frame(
+    event: Event,
+    people_state: dict[str, Any],
+    focus_person_id: str,
+    focus_action: str,
+) -> dict[str, Any]:
+    people = {person_id: dict(state) for person_id, state in people_state.items()}
+    if focus_person_id in people:
+        people[focus_person_id]["action"] = focus_action
+        people[focus_person_id]["intent"] = _intent_for_event(event)
+    return people
 
 
 def _format_time_label(timestamp: datetime, first_day: datetime.date) -> str:
@@ -324,11 +399,14 @@ def _apply_frame_durations(frames: list[dict[str, Any]]) -> None:
 
 
 def _build_metrics(summary: dict[str, Any], frames: list[dict[str, Any]]) -> list[dict[str, str]]:
+    acceptance = summary.get("acceptance", {})
+    pass_value = acceptance.get("b4_pass", acceptance.get("v1_pass"))
+    pass_label = "B4 acceptance" if "b4_pass" in acceptance else "V1 acceptance"
     return [
         {
-            "label": "V1 acceptance",
-            "value": "PASS" if summary.get("acceptance", {}).get("v1_pass") else "FAIL",
-            "tone": "green" if summary.get("acceptance", {}).get("v1_pass") else "red",
+            "label": pass_label,
+            "value": "PASS" if pass_value else "FAIL",
+            "tone": "green" if pass_value else "red",
         },
         {
             "label": "Replay frames",

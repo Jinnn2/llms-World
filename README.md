@@ -54,6 +54,9 @@ Run the B4 multi-person town validation:
 python validate_b4.py
 ```
 
+This writes B4 artifacts under `artifacts/town_b4/<run-id>/` and refreshes
+the B4 frontend replay data at `src/web/data/generatedTownReplay.json`.
+
 Run the Simulation Lab app:
 
 ```powershell
@@ -61,7 +64,9 @@ npm install
 npm run dev
 ```
 
-The World View reads `src/web/data/generatedReplay.json`, which is generated
-from the simulation rather than hand-authored event frames.
+The World View currently reads the B4 town replay at
+`src/web/data/generatedTownReplay.json`, which is generated from simulation
+artifacts rather than hand-authored event frames. The V1 replay remains
+available at `src/web/data/generatedReplay.json`.
 
 B4 town validation artifacts are written under `artifacts/town_b4/<run-id>/`.
