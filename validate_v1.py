@@ -29,7 +29,8 @@ def main() -> None:
         output_dir,
         run_metadata={
             "policy_mode": policy_mode,
-            "model": config.model,
+            "model": config.model if policy_mode == "openai_compatible" else None,
+            "configured_model": config.model,
             "base_url": config.base_url,
             "end_time": end_time.isoformat(),
         },
@@ -38,6 +39,7 @@ def main() -> None:
     print("== Validation Summary ==")
     print(f"policy_mode: {summary['run_metadata']['policy_mode']}")
     print(f"model: {summary['run_metadata']['model']}")
+    print(f"configured_model: {summary['run_metadata']['configured_model']}")
     print(f"v1_pass: {summary['acceptance']['v1_pass']}")
     print(f"acceptance_failures: {summary['acceptance']['failures']}")
     print(f"task_completed: {summary['outcome']['task_completed']}")

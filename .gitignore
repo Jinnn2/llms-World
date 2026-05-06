@@ -1,0 +1,23 @@
+# Local secrets and machine-specific config
+.env
+.env.*
+!.env.example
+
+# Python runtime outputs
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments and local caches
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Generated validation outputs
+artifacts/validation/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db

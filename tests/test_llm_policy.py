@@ -70,6 +70,24 @@ class LLMPolicyTest(unittest.TestCase):
         self.assertEqual(decision.action.target, "warehouse")
         self.assertGreaterEqual(decision.action.duration_ticks, 1)
 
+    def test_llm_policy_falls_back_on_invalid_json(self) -> None:
+        engine, _ = build_demo_engine()
+        lin = engine.world.people["lin"]
+        lin.working_memory.active_goal = "clean_square"
+
+        observation = Inspector().capture(lin, engine.world)
+        policy = LLMProtoHumanPolicy(
+            client=_FakeClient("not json"),
+            model="fake-model",
+        )
+
+        decision = policy.decide(lin, observation, ["event:task_assigned"], engine.world)
+
+        self.assertTrue(decision.metadata["fallback_used"])
+        self.assertEqual(decision.metadata["policy_source"], "llm_fallback")
+        self.assertTrue(decision.reason.startswith("llm_fallback::"))
+        self.assertIsNotNone(decision.action)
+
 
 if __name__ == "__main__":
     unittest.main()
